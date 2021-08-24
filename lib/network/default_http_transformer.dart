@@ -12,10 +12,11 @@ class DefaultHttpTransformer extends HttpTransformer {
 // }
   @override
   HttpResponse parse(Response response) {
-    if (response.data["code"] == 100) {
+    if (response.data["code"] >= 200 && response.data["code"] < 300) {
       return HttpResponse.success(response.data["data"]);
     } else {
-    return HttpResponse.failure(errorMsg:response.data["message"],errorCode: response.data["code"]);
+      return HttpResponse.failure(
+          errorMsg: response.data["message"], errorCode: response.data["code"]);
     }
     // return HttpResponse.success(response.data["data"]);
   }
