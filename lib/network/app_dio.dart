@@ -17,6 +17,11 @@ class AppDio with DioMixin implements Dio {
     );
     this.options = options;
 
+    if (dioConfig?.interceptors?.isNotEmpty ?? false) {
+      dioConfig?.interceptors?.forEach((element) {
+        interceptors.add(element);
+      });
+    }
     // DioCacheManager
     // final cacheOptions = CacheOptions(
     //   // A default store is required for interceptor.
@@ -42,9 +47,7 @@ class AppDio with DioMixin implements Dio {
           request: false,
           requestBody: true));
     }
-    if (dioConfig?.interceptors?.isNotEmpty ?? false) {
-      interceptors.addAll(interceptors);
-    }
+
     httpClientAdapter = DefaultHttpClientAdapter();
     if (dioConfig?.proxy?.isNotEmpty ?? false) {
       setProxy(dioConfig!.proxy!);
