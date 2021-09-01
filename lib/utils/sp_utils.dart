@@ -26,15 +26,15 @@ class SpUtils {
   static Future getPreference(String key, Object defaultValue) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (defaultValue is int) {
-      return prefs.getInt(key);
+      return prefs.getInt(key) ?? defaultValue;
     } else if (defaultValue is double) {
-      return prefs.getDouble(key);
+      return prefs.getDouble(key) ?? defaultValue;
     } else if (defaultValue is bool) {
-      return prefs.getBool(key);
+      return prefs.getBool(key) ?? defaultValue;
     } else if (defaultValue is String) {
-      return prefs.getString(key);
+      return prefs.getString(key) ?? defaultValue;
     } else if (defaultValue is List<String>) {
-      return prefs.getStringList(key);
+      return prefs.getStringList(key) ?? defaultValue;
     } else {
       throw new Exception("不能得到这种类型");
     }
